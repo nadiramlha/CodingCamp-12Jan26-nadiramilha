@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadira - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .popup-box {
+            background-color: #2a2a3a;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .popup-box h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+        
+        .popup-box input {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a1a2a;
+            border: 1px solid #3a3a4a;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 20px;
+        }
+        
+        .popup-box input:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+        
+        .popup-box button {
+            background-color: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .popup-box button:hover {
+            background-color: #00dd77;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        nav {
+            padding: 30px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #00ff88;
+        }
+        
+        .hero {
+            padding: 80px 0;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            line-height: 1.3;
+            margin-bottom: 60px;
+        }
+        
+        .hero-highlight {
+            color: #00ff88;
+        }
+        
+        .bio-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .bio-left {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #00ff88;
+            object-fit: cover;
+        }
+        
+        .bio-content h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .bio-content p {
+            color: #b0b0b0;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .highlight-text {
+            color: #00ff88;
+        }
+        
+        .bio-right h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-icon img {
+            width: 28px;
+            height: 28px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        
+        .social-icon:hover img {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+        
+        .what-i-do {
+            display: flex;
+            gap: 80px;
+            align-items: flex-start;
+            margin-bottom: 80px;
+        }
+        
+        .what-i-do-text {
+            flex: 1;
+            max-width: 420px;
+        }
+        
+        .what-i-do-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .what-i-do-text p {
+            color: #b0b0b0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .action-cards {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .action-card {
+            background-color: #2a2a3a;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #3a3a4a;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .action-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .action-card p {
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .featured-projects {
+            margin-bottom: 80px;
+        }
+        
+        .featured-projects h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background-color: #2a2a3a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 30px;
+        }
+        
+        .project-image {
+            background-color: #1a1a2a;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .project-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #2a2a3a 0%, #3a3a4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .project-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .project-info h3 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .project-info p {
+            color: #b0b0b0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .see-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #3a3a4a;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 20px;
+            width: fit-content;
+            transition: background-color 0.3s;
+        }
+        
+        .see-more-btn:hover {
+            background-color: #4a4a5a;
+        }
+        
+        .contact-section {
+            margin-bottom: 80px;
+        }
+        
+        .contact-section h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-form {
+            background-color: #2a2a3a;
+            padding: 40px;
+            border-radius: 12px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a1a2a;
+            border: 1px solid #3a3a4a;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+        
+        .send-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .send-btn:hover {
+            background-color: #00dd77;
+        }
+        
+        .message-preview {
+            background-color: #2a2a3a;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .message-preview h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #00ff88;
+        }
+        
+        .message-preview p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+        
+        .message-preview strong {
+            color: #ffffff;
+            display: inline-block;
+            min-width: 80px;
+        }
+        
+        .message-preview #previewMessage {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #1a1a2a;
+            border-radius: 6px;
+            border-left: 3px solid #00ff88;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        footer {
+            border-top: 1px solid #333;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-text {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .footer-social a {
+            color: #888;
+            text-decoration: none;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .footer-social a:hover {
+            color: #00ff88;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .bio-section,
+            .action-cards,
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+            .bio-left {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            nav ul {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup" class="popup-overlay">
+        <div class="popup-box">
+            <h2>Hai! What should I call you?</h2>
+            <input type="text" id="visitorName" placeholder="Your name..." />
+            <button onclick="submitName()">Submit</button>
+        </div>
+    </div>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <h1>Hi <span id="greeting">There</span>! Im <span class="hero-highlight">Nadira</span>, a human with some<br>ability to love learning and working on<br>teamwork.</h1>
+
+            <div class="bio-section">
+                <div class="bio-left">
+                    <img src="src/photo.jpg" alt="Profile" class="profile-img">
+                    <div class="bio-content">
+                        <h2>Biography</h2>
+                        <p>I'm continuously improving my skills in learning, documentation, and team management. Excited on <span class="highlight-text">Web development</span>, <span class="highlight-text">UI/UX Research</span> and <span class="highlight-text">Machine Learning</span>.</p>
+                    </div>
+                </div>
+
+                <div class="bio-right">
+                    <h2>Lets connect</h2>
+                    <div class="social-links">
+                        <a href="https://instagram.com/nadiramlha" class="social-icon" target="_blank">
+                            <img src="src/instagram.png" alt="Instagram" width="24" height="24">
+                        </a>
+                        <a href="https://linkedin.com/in/nadira-milha-nailul-fath/" class="social-icon" target="_blank">
+                            <img src="src/linkedin.png" alt="LinkedIn" width="24" height="24">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="what-i-do">
+                <div class="what-i-do-text">
+                    <h2>What I do</h2>
+                    <p>Build and maintain websites, <span class="highlight-text">frontend dev</span> and <span class="highlight-text">backend dev</span>, also have published paper about <span class="highlight-text">Data Hiding</span> and <span class="highlight-text">Network Security</span>.
+                        I aim to grow through learning and make meaningful contributions to tech field.</p>
+                </div>
+
+                <div class="action-cards">
+                    <div class="action-card">
+                        <a href="https://github.com/nadiramlha" class="social-icon" target="_blank">
+                            <img src="src/github.png" alt="Instagram" width="30" height="30">
+                        </a>
+                        <h3>Github</h3>
+                        <p>You will directly see my works through this webpage</p>
+                    </div>
+                    <div class="action-card">
+                        <a href="https://scholar.its.ac.id/en/publications/hiding-secret-data-using-reduced-differences-within-the-pixels-of/" class="social-icon" target="_blank">
+                            <img src="src/research.png" alt="LinkedIn" width="30" height="30">
+                        </a>
+                        <h3>Research</h3>
+                        <p>Based on my work as a research assistant and my graduate thesis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-projects" id="portfolio">
+            <h2>Featured Project</h2>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="src/bahana.png" alt="Family Website">
+                </div>
+                <div class="project-info">
+                    <div class="project-label">Web Development</div>
+                    <h3>Family Website</h3>
+                    <p>Connecting families through a structured database with easy access for all age groups.</p>
+                    <a href="https://bahanafamily.com/" class="see-more-btn">
+                        <span>📄</span>
+                        <span>See More</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="src/datahiding.png" alt="Data Hiding Research">
+                </div>
+                <div class="project-info">
+                    <div class="project-label">Research Project</div>
+                    <h3>Data hiding</h3>
+                    <p>The paper titled "Hiding Secret Data Using Reduced Differences within the Pixels of an Image" presents research on embedding binary data within pixel values of digital images.</p>
+                    <a href="https://scholar.its.ac.id/en/publications/hiding-secret-data-using-reduced-differences-within-the-pixels-of/" class="see-more-btn">
+                        <span>📄</span>
+                        <span>See More</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="contact-section" id="contact">
+            <h2>Message me!</h2>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" placeholder="Type your name here....">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Mail:</label>
+                    <input type="email" id="email" placeholder="whoareyou@domain.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" placeholder="Type everything you wanna know about me and my works..."></textarea>
+                </div>
+
+                <button type="button" class="send-btn" onclick="showPreview()">Send</button>
+            </form>
+
+            <div class="message-preview" id="messagePreview" style="display: none;">
+                <h3>Your Message</h3>
+                <p><strong>Name:</strong> <span id="previewName"></span></p>
+                <p><strong>Email:</strong> <span id="previewEmail"></span></p>
+                <p><strong>Message:</strong></p>
+                <p id="previewMessage"></p>
+            </div>
+        </section>
+
+        <script>
+            function showPreview() {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields!');
+                    return;
+                }
+
+                document.getElementById('previewName').textContent = name;
+                document.getElementById('previewEmail').textContent = email;
+                document.getElementById('previewMessage').textContent = message;
+
+                document.getElementById('messagePreview').style.display = 'block';
+
+                document.getElementById('messagePreview').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        </script>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Reach me out</p>
+            <div class="footer-social">
+                <a href="https://github.com/nadiramlha" class="social-icon" target="_blank">
+                    <img src="src/github.png" alt="Instagram" width="30" height="30">
+                </a>
+                <a href="https://linkedin.com/in/nadira-milha-nailul-fath/" class="social-icon" target="_blank">
+                    <img src="src/linkedin.png" alt="LinkedIn" width="24" height="24">
+                </a>
+                <a href="https://instagram.com/nadiramlha" class="social-icon" target="_blank">
+                    <img src="src/instagram.png" alt="Instagram" width="24" height="24">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function submitName() {
+            const nameInput = document.getElementById('visitorName');
+            const name = nameInput.value.trim();
+
+            if (name) {
+                document.getElementById('greeting').textContent = name;
+                document.getElementById('popup').classList.add('hidden');
+            } else {
+                alert('Please enter your name!');
+            }
+        }
+
+        document.getElementById('visitorName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitName();
+            }
+        });
+    </script>
+</body>
+
+</html>
